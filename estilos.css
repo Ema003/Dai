@@ -1,0 +1,621 @@
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#05000d;color:white;font-family:Georgia,serif}
+.universo{position:fixed;inset:0;overflow:hidden;background:radial-gradient(circle,#6f2185,#6d0770 45%,#7507a0)}
+.nebulosa{position:absolute;inset:-30%;background:radial-gradient(ellipse,rgba(255,70,190,.3),rgba(100,40,220,.18) 35%,transparent 70%);filter:blur(25px);animation:giro 18s linear infinite}
+@keyframes giro{to{transform:rotate(360deg) scale(1.1)}}
+.estrella{position:absolute;width:3px;height:3px;border-radius:50%;background:white;box-shadow:0 0 8px white;animation:brillo 1.8s infinite alternate}
+@keyframes brillo{to{opacity:.2;transform:scale(.5)}}
+.pantalla {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    padding: 28px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: scale(1.08);
+    filter: blur(8px);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease,
+        filter 1s ease,
+        visibility 1s;
+}
+
+.pantalla.activa {
+    opacity: 1;
+    visibility: visible;
+
+    transform: scale(1);
+    filter: blur(0);
+}
+.pantalla.activa .mensaje,
+.pantalla.activa .foto-marco,
+.pantalla.activa .titulo,
+.pantalla.activa .boton {
+    animation: aparecerContenido 1.2s ease forwards;
+}
+
+@keyframes aparecerContenido {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+.mensaje{position:relative;z-index:5;font-size:clamp(24px,7vw,42px);line-height:1.35;text-shadow:0 0 10px #ff66d5,0 0 25px #ff27b7}
+.final{font-size:25px;margin-top:22px}
+.flores{position:absolute;inset:0;pointer-events:none}
+.flores span{position:absolute;font-size:42px;filter:drop-shadow(0 0 10px #ff55c9);animation:flotar 4s ease-in-out infinite}
+.flores span:nth-child(1){left:4%;top:12%}.flores span:nth-child(2){right:6%;top:17%}.flores span:nth-child(3){left:8%;bottom:15%}.flores span:nth-child(4){right:8%;bottom:10%}
+@keyframes flotar{50%{transform:translateY(-22px) rotate(8deg)}}
+.agujero{
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    position: absolute;
+    top: 39%;
+    left: calc(50% + 10px);
+    transform: translate(-50%, -50%);
+
+    border: 5px solid #ff62d9;
+
+    box-shadow:
+        0 0 25px #ff48c7,
+        0 0 50px #ff25b5,
+        0 0 80px rgba(190, 40, 255, .8);
+
+    z-index: 5;}
+    /* FOTO */
+.agujero img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: 80% center;
+    display: block;
+
+    border-radius: 50%;
+}
+.agujero:before{content: "";
+
+    position: absolute;
+    inset: -25px;
+
+    border: 8px solid transparent;
+
+    border-top-color: #ff62d9;
+    border-right-color: #a84dff;
+    border-bottom-color: #ff25b5;
+
+    border-radius: 50%;
+
+    animation: orbita 5s linear infinite;
+
+    z-index: 2;
+    pointer-events: none;
+}
+
+@keyframes orbita {
+    to {
+        transform: rotate(360deg);
+    }}
+@keyframes orbita{to{transform:rotate(360deg)}}
+.foto-marco{position:relative;z-index:8;width:min(78vw,330px);padding:8px;margin-top:22px;border-radius:24px;background:linear-gradient(135deg,#ff9ae8,#9d55ff,#ff4acb);box-shadow:0 0 25px #ff4acb,0 0 60px rgba(255,60,200,.45);animation:entrada 1.2s ease}
+.foto-marco img{display:block;width:100%;height:auto;max-height:52vh;object-fit:cover;border-radius:17px}
+@keyframes entrada{from{opacity:0;transform:scale(.75) translateY(25px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.titulo{position:relative;z-index:8;font-family:cursive;font-size:clamp(48px,13vw,88px);line-height:1.02;text-shadow:0 0 8px #fff,0 0 25px #ff52c9,0 0 55px #ff008c}
+.boton{position:relative;z-index:20;margin-top:25px;border:1px solid #ffb4eb;border-radius:30px;background:rgba(255,70,190,.18);color:white;padding:12px 22px;font-size:17px;box-shadow:0 0 18px #ff4acb}
+.corazon{position:absolute;z-index:3;color:#ff73d2;font-size:22px;animation:subir 6s linear forwards;pointer-events:none}
+@keyframes subir{from{transform:translateY(105vh);opacity:0}15%{opacity:1}to{transform:translateY(-15vh);opacity:0}}
+/* =========================================
+   PANTALLA FINAL NEGRA
+========================================= */
+
+.pantalla-final {
+    background: #000 !important;
+    z-index: 100;
+}
+
+
+/* =========================================
+   RAMO
+========================================= */
+
+.ramo {
+    position: relative;
+    width: 330px;
+    height: 450px;
+    margin-top: -35px;
+
+    animation: aparecerRamo 2.5s ease-out forwards;
+}
+
+@keyframes aparecerRamo {
+
+    from {
+        opacity: 0;
+        transform: translateY(80px) scale(.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================================
+   TALLOS
+========================================= */
+
+.tallo {
+    position: absolute;
+
+    width: 6px;
+    height: 245px;
+
+    bottom: 70px;
+    left: 50%;
+
+    background: linear-gradient(
+        90deg,
+        #174d29,
+        #58a94d,
+        #174d29
+    );
+
+    border-radius: 10px;
+
+    transform-origin: bottom;
+
+    z-index: 2;
+}
+
+.t1 {
+    transform: rotate(-28deg);
+}
+
+.t2 {
+    transform: rotate(-14deg);
+}
+
+.t3 {
+    transform: rotate(0deg);
+}
+
+.t4 {
+    transform: rotate(15deg);
+}
+
+.t5 {
+    transform: rotate(29deg);
+}
+
+
+/* =========================================
+   HOJAS
+========================================= */
+
+.hoja {
+    position: absolute;
+
+    width: 28px;
+    height: 75px;
+
+    background: linear-gradient(
+        135deg,
+        #64ad5b,
+        #18552d
+    );
+
+    border-radius: 100% 0 100% 0;
+
+    z-index: 4;
+}
+
+.h1 {
+    left: 75px;
+    bottom: 170px;
+    transform: rotate(-55deg);
+}
+
+.h2 {
+    left: 105px;
+    bottom: 115px;
+    transform: rotate(-100deg);
+}
+
+.h3 {
+    right: 70px;
+    bottom: 170px;
+    transform: rotate(55deg);
+}
+
+.h4 {
+    right: 105px;
+    bottom: 115px;
+    transform: rotate(100deg);
+}
+
+
+/* =========================================
+   ROSAS
+========================================= */
+
+.rosa {
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            #ff9dd1 0%,
+            #f75baa 45%,
+            #c52e78 75%,
+            #861c52 100%
+        );
+
+    box-shadow:
+        0 0 18px rgba(255, 80, 180, .7);
+
+    z-index: 8;
+}
+
+
+/* pétalos internos */
+
+.rosa span {
+    position: absolute;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffb8df,
+            #ed4d9c
+        );
+
+    border: 2px solid rgba(255,255,255,.18);
+}
+
+.rosa span:nth-child(1) {
+    top: -5px;
+    left: 18px;
+}
+
+.rosa span:nth-child(2) {
+    top: 20px;
+    left: -5px;
+}
+
+.rosa span:nth-child(3) {
+    top: 20px;
+    right: -5px;
+}
+
+.rosa span:nth-child(4) {
+    bottom: -5px;
+    left: 18px;
+}
+
+
+/* centro de la rosa */
+
+.rosa b {
+    position: absolute;
+
+    width: 27px;
+    height: 27px;
+
+    left: 32px;
+    top: 32px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffe1f2,
+            #ff77bd,
+            #c92778
+        );
+
+    box-shadow:
+        0 0 10px #ffb4dc;
+
+    z-index: 5;
+}
+
+
+/* posición rosas */
+
+.r1 {
+    left: 25px;
+    top: 65px;
+    transform: rotate(-8deg);
+}
+
+.r2 {
+    left: 120px;
+    top: 35px;
+}
+
+.r3 {
+    right: 20px;
+    top: 70px;
+    transform: rotate(8deg);
+}
+
+
+/* =========================================
+   TULIPANES
+========================================= */
+
+.tulipan {
+    position: absolute;
+
+    width: 75px;
+    height: 180px;
+
+    z-index: 7;
+}
+
+.tul1 {
+    left: 65px;
+    top: 145px;
+
+    transform: rotate(-12deg);
+}
+
+.tul2 {
+    right: 55px;
+    top: 145px;
+
+    transform: rotate(12deg);
+}
+
+
+/* tallo del tulipán */
+
+.tulipan::after {
+    content: "";
+
+    position: absolute;
+
+    width: 6px;
+    height: 130px;
+
+    left: 35px;
+    top: 65px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #1b542b,
+            #58a94d,
+            #1b542b
+        );
+
+    border-radius: 10px;
+}
+
+
+/* cabeza del tulipán */
+
+.flor-tulipan {
+    position: absolute;
+
+    width: 70px;
+    height: 85px;
+
+    top: 0;
+    left: 2px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffbce1,
+            #f35aa8 60%,
+            #b52670
+        );
+
+    border-radius:
+        45% 45% 50% 50% /
+        35% 35% 65% 65%;
+
+    box-shadow:
+        0 0 15px rgba(255,80,180,.6);
+}
+
+
+/* forma superior del tulipán */
+
+.flor-tulipan::before {
+    content: "";
+
+    position: absolute;
+
+    width: 35px;
+    height: 45px;
+
+    left: 17px;
+    top: -7px;
+
+    background: #ffb7dc;
+
+    border-radius: 50%;
+
+    box-shadow:
+        -18px 15px 0 -4px #f76ab0,
+        18px 15px 0 -4px #f76ab0;
+}
+
+
+/* línea central */
+
+.flor-tulipan::after {
+    content: "";
+
+    position: absolute;
+
+    width: 4px;
+    height: 65px;
+
+    left: 33px;
+    top: 10px;
+
+    background: rgba(255,255,255,.25);
+
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   ENVOLTORIO DEL RAMO
+========================================= */
+
+.envoltorio {
+    position: absolute;
+
+    width: 215px;
+    height: 145px;
+
+    bottom: 0;
+    left: 57px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8d9e9,
+            #d99abb,
+            #f7d4e5
+        );
+
+    clip-path: polygon(
+        4% 0,
+        96% 0,
+        75% 100%,
+        25% 100%
+    );
+
+    z-index: 12;
+
+    box-shadow:
+        0 0 20px rgba(255,180,220,.35);
+}
+
+
+/* =========================================
+   CINTA
+========================================= */
+
+.cinta {
+    position: absolute;
+
+    width: 70px;
+    height: 23px;
+
+    left: 130px;
+    bottom: 65px;
+
+    background: #ed6fb2;
+
+    border-radius: 8px;
+
+    z-index: 15;
+
+    box-shadow:
+        0 0 12px #ff8ecb;
+}
+
+.cinta::before,
+.cinta::after {
+    content: "";
+
+    position: absolute;
+
+    width: 38px;
+    height: 42px;
+
+    top: -9px;
+
+    background: #f58ac5;
+
+    border-radius: 50%;
+}
+
+.cinta::before {
+    left: -28px;
+    transform: rotate(-35deg);
+}
+
+.cinta::after {
+    right: -28px;
+    transform: rotate(35deg);
+}
+
+
+/* =========================================
+   TEXTO
+========================================= */
+
+.mensaje-ramo {
+    position: relative;
+
+    z-index: 30;
+
+    margin-top: -25px;
+
+    color: #ffb7df;
+
+    font-size: clamp(25px, 7vw, 38px);
+
+    text-shadow:
+        0 0 10px #ff4abf,
+        0 0 25px #ff168e;
+}
+
+.dedicatoria {
+    position: relative;
+
+    z-index: 30;
+
+    margin-top: 8px;
+
+    color: white;
+
+    font-size: 20px;
+}
+
+.pantalla-final .boton {
+    margin-top: 20px;
+
+    z-index: 40;
+
+    background: rgba(255,70,190,.12);
+}
